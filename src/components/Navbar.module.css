@@ -1,0 +1,91 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 20px 40px;
+  transition: all 0.3s ease;
+}
+.scrolled {
+  background: rgba(7, 7, 15, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 40px;
+}
+.logo {
+  font-size: 1.4rem;
+  font-weight: 900;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-right: auto;
+  letter-spacing: -0.02em;
+}
+.links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+}
+.link {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.link:hover { color: var(--text-primary); }
+.activeLink { color: var(--text-primary) !important; }
+.dot {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-1);
+}
+.cta { font-size: 0.85rem; padding: 10px 20px; }
+.toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; }
+.mobile {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: rgba(7,7,15,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobileLink {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 12px 8px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: color 0.2s;
+}
+.mobileLink:hover { color: var(--text-primary); }
+
+@media (max-width: 900px) {
+  .links, .cta { display: none; }
+  .toggle { display: flex; margin-left: auto; }
+  .nav { padding: 16px 24px; }
+  .scrolled { padding: 12px 24px; }
+}
