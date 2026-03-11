@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Linkedin, Github, Phone, MapPin, Send } from 'lucide-react'
 import { personal } from '../data/portfolio'
@@ -19,6 +20,27 @@ const fadeUp = (delay = 0) => ({
 })
 
 export default function Contact() {
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [sent, setSent] = useState(false)
+
+  const handleChange = (e) => {
+    setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { name, email, message } = form
+    if (!name.trim() || !email.trim() || !message.trim()) return
+
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`)
+    const body = encodeURIComponent(
+      `Hi Lakshman,\n\n${message}\n\n---\nFrom: ${name}\nEmail: ${email}`
+    )
+    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`
+    setSent(true)
+    setTimeout(() => setSent(false), 4000)
+  }
+
   return (
     <section className="section" id="contact">
       <div className="container">
@@ -63,21 +85,51 @@ export default function Contact() {
           {/* Quick contact form */}
           <motion.div className={styles.formSection} {...fadeUp(0.3)}>
             <h3 className={styles.formTitle}>Send a Message</h3>
-            <form className={styles.form} onSubmit={e => { e.preventDefault(); window.location.href = `mailto:${personal.email}` }}>
+            <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.field}>
-                <label className={styles.label}>Your Name</label>
-                <input className={styles.input} type="text" placeholder="John Doe" />
+                <label className={styles.label} htmlFor="cf-name">Your Name</label>
+                <input
+                  id="cf-name"
+                  name="name"
+                  className={styles.input}
+                  type="text"
+                  placeholder="John Doe"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className={styles.field}>
-                <label className={styles.label}>Email Address</label>
-                <input className={styles.input} type="email" placeholder="john@example.com" />
+                <label className={styles.label} htmlFor="cf-email">Your Email</label>
+                <input
+                  id="cf-email"
+                  name="email"
+                  className={styles.input}
+                  type="email"
+                  placeholder="john@example.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className={styles.field}>
-                <label className={styles.label}>Message</label>
-                <textarea className={styles.textarea} rows="5" placeholder="Hi Lakshman, I'd like to..."></textarea>
+                <label className={styles.label} htmlFor="cf-message">Message</label>
+                <textarea
+                  id="cf-message"
+                  name="message"
+                  className={styles.textarea}
+                  rows="5"
+                  placeholder="Hi Lakshman, I'd like to..."
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                />
               </div>
-              <button type="submit" className={`btn btn-primary ${styles.submitBtn}`}>
-                Send Message <Send size={18} />
+              <button
+                type="submit"
+                className={`btn btn-primary ${styles.submitBtn} ${sent ? styles.sentBtn : ''}`}
+              >
+                {sent ? '✓ Opening Mail App…' : <><Send size={18} /> Send Message</>}
               </button>
             </form>
           </motion.div>

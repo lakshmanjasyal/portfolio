@@ -132,6 +132,12 @@
 
 .submitBtn { width: 100%; justify-content: center; }
 
+.sentBtn {
+  background: #16a34a !important;
+  border-color: #16a34a !important;
+  pointer-events: none;
+}
+
 /* ---- BIG CTA ---- */
 .bigCta {
   display: flex;
