@@ -1,26 +1,6 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { skills } from '../data/portfolio'
 import styles from './Skills.module.css'
-
-function SkillBar({ name, level, inView }) {
-  return (
-    <div className={styles.barItem}>
-      <div className={styles.barHeader}>
-        <span>{name}</span>
-        <span>{level}%</span>
-      </div>
-      <div className={styles.barTrack}>
-        <motion.div
-          className={styles.barFill}
-          initial={{ width: 0 }}
-          animate={{ width: inView ? `${level}%` : 0 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-        />
-      </div>
-    </div>
-  )
-}
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -30,67 +10,44 @@ const fadeUp = (delay = 0) => ({
 })
 
 export default function Skills() {
-  const barsRef = useRef(null)
-  const inView = useInView(barsRef, { once: true, margin: '-80px' })
+  const allSkills = [...skills.languages, ...skills.tools.map(t => ({ name: t }))]
 
   return (
     <section className="section" id="skills">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="section-tag">What I Know</p>
-          <h2 className="section-title">Technical <span className="gradient-text">Skills</span></h2>
-        </motion.div>
+        <h2 className="section-title">Skills</h2>
+        
+        <div className={styles.flexContainer}>
+          <div className={styles.content}>
+            <motion.p className={styles.intro} {...fadeUp(0.1)}>
+              I have a vast experience in the following web technologies:
+            </motion.p>
 
-        <div className={styles.grid}>
-          {/* Language Bars */}
-          <motion.div className={`${styles.card} glass-card`} {...fadeUp(0.1)} ref={barsRef}>
-            <h3 className={styles.catTitle}><span>💻</span> Languages</h3>
-            <div className={styles.bars}>
-              {skills.languages.map(s => (
-                <SkillBar key={s.name} name={s.name} level={s.level} inView={inView} />
+            <div className={styles.skillsGrid}>
+              {allSkills.slice(0, 4).map((s, i) => (
+                <motion.div key={s.name} className={styles.skillItem} {...fadeUp(i * 0.1)}>
+                  <div className={styles.iconBox}>
+                    {/* Simplified Shield/Hexagon Icon Placeholder */}
+                    <div className={styles.shield}>
+                      <span className={styles.skillNameAbbr}>{s.name[0]}</span>
+                    </div>
+                  </div>
+                  <span className={styles.skillLabel}>{s.name}</span>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Tools */}
-          <motion.div className={`${styles.card} glass-card`} {...fadeUp(0.2)}>
-            <h3 className={styles.catTitle}><span>🛠️</span> Frameworks & Tools</h3>
-            <div className={styles.pills}>
-              {skills.tools.map(t => (
-                <motion.span key={t} className={styles.pill} whileHover={{ scale: 1.06 }}>{t}</motion.span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Soft Skills */}
-          <motion.div className={`${styles.card} glass-card`} {...fadeUp(0.25)}>
-            <h3 className={styles.catTitle}><span>🧠</span> Soft Skills</h3>
-            <div className={styles.pills}>
-              {skills.soft.map(t => (
-                <motion.span key={t} className={`${styles.pill} ${styles.pillSoft}`} whileHover={{ scale: 1.06 }}>{t}</motion.span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Certifications */}
-          <motion.div className={`${styles.card} glass-card`} {...fadeUp(0.3)}>
-            <h3 className={styles.catTitle}><span>📜</span> Certifications</h3>
-            <div className={styles.certs}>
-              {skills.certifications.map((c, i) => (
-                <div key={i} className={styles.certItem}>
-                  <span className={`${styles.certBadge} ${c.status === 'In Progress' ? styles.certProgress : styles.certDone}`}>
-                    {c.status}
-                  </span>
-                  <span className={styles.certName}>{c.name}</span>
-                </div>
-              ))}
-            </div>
+          <motion.div className={styles.illustration} {...fadeUp(0.3)}>
+            {/* SVG Placeholder for Undraw Illustration */}
+            <svg width="400" height="300" viewBox="0 0 400 300" fill="none">
+              <rect x="50" y="50" width="200" height="200" rx="10" fill="#E5E7EB" />
+              <rect x="70" y="80" width="160" height="20" rx="4" fill="#30475E" opacity="0.4" />
+              <rect x="70" y="120" width="160" height="20" rx="4" fill="#30475E" opacity="0.4" />
+              <rect x="70" y="160" width="160" height="20" rx="4" fill="#30475E" opacity="0.4" />
+              <circle cx="280" cy="150" r="50" fill="#30475E" />
+              <path d="M280 200 L280 280 M250 230 L310 230" stroke="#30475E" strokeWidth="12" strokeLinecap="round" />
+            </svg>
           </motion.div>
         </div>
       </div>

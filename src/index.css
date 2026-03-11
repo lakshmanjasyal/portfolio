@@ -1,181 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg-base: #07070f;
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --bg-card-hover: rgba(255, 255, 255, 0.07);
-  --accent-1: #7c6cff;
-  --accent-2: #00e5ff;
-  --accent-3: #ff6c9d;
-  --gradient: linear-gradient(135deg, #7c6cff, #00e5ff);
-  --gradient-radial: radial-gradient(ellipse at center, rgba(124, 108, 255, 0.15), transparent 70%);
-  --text-primary: #f0f0ff;
-  --text-secondary: #8888aa;
-  --text-muted: #555570;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(124, 108, 255, 0.3);
-  --shadow-glow: 0 0 40px rgba(124, 108, 255, 0.15);
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --radius: 16px;
-  --radius-sm: 10px;
+  /* Figma Color Tokens */
+  --primary: #F05454;
+  --primary-hover: #e04444;
+  --secondary: #30475E;
+  --accent: #222831;
+  --bg-base: #F5F5F5;
+  --bg-white: #FFFFFF;
+  --bg-dark: #222831;
+  
+  --text-main: #30475E;
+  --text-muted: #6B7280;
+  --text-light: #F9FAFB;
+  
+  --border: #E5E7EB;
+  --radius: 12px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --container: 1200px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; font-size: 18px; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: 'Outfit', sans-serif;
   background: var(--bg-base);
-  color: var(--text-primary);
+  color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124,108,255,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(0,229,255,0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+/* TYPOGRAPHY */
+h1, h2, h3, h4 { color: var(--secondary); font-weight: 700; }
+
+.section-title {
+  color: var(--primary);
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  text-transform: capitalize;
 }
 
-#root { position: relative; z-index: 1; }
-
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
-img { max-width: 100%; display: block; }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
-::-webkit-scrollbar-thumb { background: var(--accent-1); border-radius: 4px; }
-
-/* GRADIENTS & HIGHLIGHTS */
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* CONTAINERS */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-/* GLASS CARD */
-.glass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
-}
-.glass-card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-glow);
+.section {
+  padding: 100px 0;
 }
 
 /* BUTTONS */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 28px;
-  border-radius: 50px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+  gap: 0.5rem;
+  padding: 0.8rem 2.4rem;
+  border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
+  transition: var(--transition);
   border: none;
-  transition: all var(--transition);
-  text-decoration: none;
+  font-family: inherit;
 }
+
 .btn-primary {
-  background: var(--gradient);
-  color: #fff;
-  box-shadow: 0 4px 24px rgba(124, 108, 255, 0.35);
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(240, 84, 84, 0.39);
 }
+
 .btn-primary:hover {
+  background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(124, 108, 255, 0.5);
+  box-shadow: 0 6px 20px rgba(240, 84, 84, 0.23);
 }
-.btn-outline {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-accent);
-}
-.btn-outline:hover {
-  background: rgba(124, 108, 255, 0.1);
-  border-color: var(--accent-1);
-  transform: translateY(-2px);
-}
-.btn-ghost {
-  background: transparent;
-  color: var(--text-secondary);
+
+/* UTILS */
+.glass-card {
+  background: var(--bg-white);
   border: 1px solid var(--border);
-}
-.btn-ghost:hover {
-  color: var(--text-primary);
-  border-color: var(--border-accent);
-  transform: translateY(-2px);
+  border-radius: var(--radius);
+  transition: var(--transition);
 }
 
-/* SECTION */
-.section {
-  padding: 120px 0;
-  position: relative;
+/* DECORATIVE ELEMENTS (Dots, Waves) */
+.dots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
-.container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 36px;
-}
-.section-header {
-  text-align: center;
-  margin-bottom: 64px;
-}
-.section-tag {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent-2);
-  margin-bottom: 12px;
-}
-.section-title {
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
-  font-weight: 800;
-  color: var(--text-primary);
+.dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--primary);
 }
 
-/* TAG PILLS */
-.tag {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  background: rgba(124, 108, 255, 0.1);
-  border: 1px solid rgba(124, 108, 255, 0.2);
-  color: var(--accent-1);
-}
-
-/* CANVAS BG */
-#particles-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.6;
-}
-
-/* RESPONSIVE */
+/* MOBILE */
 @media (max-width: 768px) {
-  html { font-size: 16px; }
-  .section { padding: 80px 0; }
-  .section-header { margin-bottom: 48px; }
+  .container { padding: 0 1.5rem; }
+  .section { padding: 60px 0; }
+  .section-title { font-size: 1.1rem; }
 }

@@ -1,38 +1,74 @@
 .footer {
-  border-top: 1px solid var(--border);
-  padding: 48px 0 32px;
   position: relative;
+  margin-top: -60px; /* Overlap with contact section for wave effect */
 }
+
+.wave {
+  width: 100%;
+  line-height: 0;
+}
+
+.wave svg {
+  width: 100%;
+  height: 120px;
+}
+
+.main {
+  background: var(--secondary);
+  padding: 3rem 0 6rem;
+  color: white;
+}
+
 .inner {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.sideTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.icons a {
+  color: white;
+  transition: var(--transition);
+}
+
+.icons a:hover {
+  transform: translateY(-5px);
+  color: var(--primary);
+}
+
+.githubLink {
+  display: flex;
   align-items: center;
-  gap: 20px;
-  text-align: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
 }
-.logo {
-  font-size: 1.6rem;
-  font-weight: 900;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+
+.githubLink:hover {
+  color: var(--primary);
 }
-.tagline { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
-.sub { font-size: 0.82rem; color: var(--text-muted); margin-top: -8px; }
-.socials { display: flex; gap: 12px; }
-.icon {
-  display: flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  transition: all 0.2s;
+
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .icons {
+    justify-content: center;
+  }
 }
-.icon:hover {
-  border-color: var(--accent-1);
-  color: var(--accent-1);
-  background: rgba(124,108,255,0.08);
-  transform: translateY(-2px);
-}
-.copy { font-size: 0.78rem; color: var(--text-muted); }
