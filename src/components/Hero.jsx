@@ -20,8 +20,10 @@ const useTyping = (words) => {
     } else if (deleting && display.length > 0) {
       timer = setTimeout(() => setDisplay(display.slice(0, -1)), 40)
     } else if (deleting && display.length === 0) {
-      setDeleting(false)
-      setIndex((i) => (i + 1) % words.length)
+      timer = setTimeout(() => {
+        setDeleting(false)
+        setIndex((i) => (i + 1) % words.length)
+      }, 300)
     }
     return () => clearTimeout(timer)
   }, [display, deleting, index, words])

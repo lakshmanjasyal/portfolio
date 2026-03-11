@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
 import { projects } from '../data/portfolio'
@@ -12,8 +11,6 @@ const fadeUp = (delay = 0) => ({
 })
 
 export default function Projects() {
-  const [hovered, setHovered] = useState(null)
-
   return (
     <section className="section" id="projects">
       <div className="container">
@@ -33,8 +30,6 @@ export default function Projects() {
             <motion.div
               key={p.id}
               className={`${styles.card} glass-card ${p.featured ? styles.featured : ''}`}
-              onMouseEnter={() => setHovered(p.id)}
-              onMouseLeave={() => setHovered(null)}
               {...fadeUp(i * 0.07)}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.3 }}
