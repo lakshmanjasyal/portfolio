@@ -1,50 +1,126 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
 :root {
-  /* Figma Color Tokens */
-  --primary: #F05454;
-  --primary-hover: #e04444;
-  --secondary: #30475E;
-  --accent: #222831;
-  --bg-base: #F5F5F5;
-  --bg-white: #FFFFFF;
-  --bg-dark: #222831;
-  
-  --text-main: #30475E;
-  --text-muted: #6B7280;
-  --text-light: #F9FAFB;
-  
-  --border: #E5E7EB;
-  --radius: 12px;
+  /* Brand Colors */
+  --primary:        #F05454;
+  --primary-hover:  #d94040;
+  --secondary:      #30475E;
+  --secondary-dark: #1f2f3d;
+  --accent:         #222831;
+
+  /* Backgrounds */
+  --bg-base:   #F5F5F5;
+  --bg-white:  #FFFFFF;
+  --bg-dark:   #222831;
+  --bg-card:   #FFFFFF;
+  --bg-subtle: #F9FAFB;
+
+  /* Text */
+  --text-primary:   #1a1a2e;
+  --text-secondary: #30475E;
+  --text-main:      #30475E;
+  --text-muted:     #6B7280;
+  --text-light:     #F9FAFB;
+
+  /* Borders */
+  --border:        #E5E7EB;
+  --border-accent: rgba(48, 71, 94, 0.3);
+
+  /* Gradients & Accents */
+  --gradient:  linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  --accent-1:  #F05454;
+  --accent-2:  #30475E;
+  --accent-3:  #6366f1;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md:   0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:   0 16px 48px rgba(0,0,0,0.12);
+  --shadow-card: 0 8px 30px rgba(0,0,0,0.08);
+
+  /* Misc */
+  --radius:     12px;
+  --radius-lg:  20px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --container: 1200px;
+  --container:  1200px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ============================================
+   RESET
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
 body {
   font-family: 'Outfit', sans-serif;
   background: var(--bg-base);
-  color: var(--text-main);
+  color: var(--text-secondary);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* TYPOGRAPHY */
-h1, h2, h3, h4 { color: var(--secondary); font-weight: 700; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; }
 
-.section-title {
-  color: var(--primary);
-  text-align: center;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 3rem;
-  text-transform: capitalize;
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-secondary);
 }
 
-/* CONTAINERS */
+h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: 1.4rem; }
+
+/* Section headings */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
 .container {
   max-width: var(--container);
   margin: 0 auto;
@@ -53,57 +129,123 @@ h1, h2, h3, h4 { color: var(--secondary); font-weight: 700; }
 
 .section {
   padding: 100px 0;
+  background: var(--bg-white);
 }
 
-/* BUTTONS */
+.section:nth-child(even) {
+  background: var(--bg-base);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.8rem 2.4rem;
-  border-radius: 6px;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
-  border: none;
+  border: 2px solid transparent;
   font-family: inherit;
+  white-space: nowrap;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: var(--primary);
   color: white;
-  box-shadow: 0 4px 14px 0 rgba(240, 84, 84, 0.39);
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(240, 84, 84, 0.35);
 }
-
 .btn-primary:hover {
   background: var(--primary-hover);
+  border-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(240, 84, 84, 0.23);
+  box-shadow: 0 8px 24px rgba(240, 84, 84, 0.4);
 }
 
-/* UTILS */
+.btn-outline {
+  background: transparent;
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+.btn-outline:hover {
+  background: var(--secondary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ============================================
+   UTILITY CARDS
+   ============================================ */
 .glass-card {
-  background: var(--bg-white);
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
+.glass-card:hover {
+  box-shadow: var(--shadow-md);
+}
 
-/* DECORATIVE ELEMENTS (Dots, Waves) */
+/* ============================================
+   TAGS / PILLS
+   ============================================ */
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(48, 71, 94, 0.08);
+  color: var(--secondary);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid rgba(48, 71, 94, 0.15);
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
 .dots-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-.dot {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--primary);
+  gap: 10px;
 }
 
-/* MOBILE */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.5;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ============================================
+   MOBILE
+   ============================================ */
 @media (max-width: 768px) {
-  .container { padding: 0 1.5rem; }
-  .section { padding: 60px 0; }
-  .section-title { font-size: 1.1rem; }
+  .container { padding: 0 1.25rem; }
+  .section { padding: 70px 0; }
+  .section-title { font-size: 1.8rem; }
 }
